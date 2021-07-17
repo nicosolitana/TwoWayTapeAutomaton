@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoWayTapeAutomaton", "TwoWayTapeAutomaton\TwoWayTapeAutomaton.csproj", "{F09D0282-CFD9-4CF9-8CB8-2014B2FFECCB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F09D0282-CFD9-4CF9-8CB8-2014B2FFECCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F09D0282-CFD9-4CF9-8CB8-2014B2FFECCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F09D0282-CFD9-4CF9-8CB8-2014B2FFECCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F09D0282-CFD9-4CF9-8CB8-2014B2FFECCB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F989707E-62B9-46E3-8AB9-326195BA76AB}
+	EndGlobalSection
+EndGlobal

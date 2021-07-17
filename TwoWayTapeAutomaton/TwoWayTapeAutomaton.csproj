@@ -56,6 +56,7 @@
     </Compile>
     <Compile Include="Model\Automata.cs" />
     <Compile Include="Model\IO.cs" />
+    <Compile Include="Model\TwoTapeGUI.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainForm.resx">

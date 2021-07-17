@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using TwoWayTapeAutomaton.Model;
 
 namespace TwoWayTapeAutomaton.Controller
@@ -91,10 +92,30 @@ namespace TwoWayTapeAutomaton.Controller
             return automaton;
         }
 
+        private static void ExtractFormalDef(List<Automata> automaLst)
+        {
+            var aState = automaLst.Select(a => a.State).Distinct().ToList();
+            var fState = automaLst.Where(a => a.Direction == DIR.HELL || a.Direction == DIR.ACCEPT)
+                .Select(a => a.State).Distinct().ToList();
+            var iState = automaLst[0].State;
+            var symbols = automaLst.Where(w => w.Cmd != null)
+                .Select(a => a.Cmd.Select(c => c.Input).Distinct().ToList())
+                .SelectMany(x => x).Distinct().ToList();
+
+            string formalDef = "Q = { " + String.Join(", ", aState) + " }" + Environment.NewLine +
+                "S = { " + String.Join(", ", symbols) + " }" + Environment.NewLine +
+                "F = { " + String.Join(", ", fState) + " }" + Environment.NewLine +
+                "qi = { " + String.Join(", ", iState) + " }" + Environment.NewLine;
+
+            TwoTapeGUI.FormalDef.Invoke(new MethodInvoker(delegate
+            {
+                TwoTapeGUI.FormalDef.Text = formalDef;
+            }));
+        }
+
         public List<Automata> Extract(string prog)
         {
             var codeLst = ExtractData(prog, Environment.NewLine);
-
             List<Automata> automaLst = new List<Automata>();
             foreach (var code in codeLst)
             {
@@ -103,6 +124,7 @@ namespace TwoWayTapeAutomaton.Controller
                     break;
                 automaLst.Add(value);
             }
+            ExtractFormalDef(automaLst);
             return automaLst;
         }
     }

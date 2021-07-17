@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Threading;
+using System.Windows.Forms;
 using TwoWayTapeAutomaton.Model;
 
 namespace TwoWayTapeAutomaton.Controller
@@ -34,6 +37,40 @@ namespace TwoWayTapeAutomaton.Controller
                 return true;
         }
 
+        private void UpdateTape(int i, DIR dir)
+        {
+            if (TwoTapeGUI.IsSimulate)
+            {
+                TwoTapeGUI.Tape[i].BackColor = Color.Gold;
+                if (dir == DIR.RIGHT)
+                    TwoTapeGUI.Tape[i - 1].BackColor = Color.Lavender;
+
+                if (dir == DIR.LEFT)
+                    TwoTapeGUI.Tape[i + 1].BackColor = Color.Lavender;
+
+                TwoTapeGUI.Tape[i].Invoke(new MethodInvoker(delegate
+                {
+                    TwoTapeGUI.Tape[i].Focus();
+                }));
+
+                Thread.Sleep(200);
+            }
+        }
+
+        private void UpdateState(string prevState, string nextState)
+        {
+            TwoTapeGUI.CurrentState.Invoke(new MethodInvoker(delegate
+            {
+                TwoTapeGUI.CurrentState.Text = prevState;
+            }));
+
+            TwoTapeGUI.NextState.Invoke(new MethodInvoker(delegate
+            {
+                TwoTapeGUI.NextState.Text = nextState;
+            }));
+            Thread.Sleep(200);
+        }
+
         private bool Simulate(List<Automata> automaLst, string input)
         {
             input = "#" + input + "#";
@@ -48,9 +85,14 @@ namespace TwoWayTapeAutomaton.Controller
                     || (i < 0))
                     break;
 
+                UpdateTape(i, dir);
+
+                string prevState = state;
                 string value = "" + input[i];
                 state = GetNextState(value, state, automaLst, dir);
                 automaton = GetAutomaton(state, automaLst, out dir);
+                UpdateState(prevState, state);
+
                 if (dir == DIR.RIGHT)
                     i++;
 

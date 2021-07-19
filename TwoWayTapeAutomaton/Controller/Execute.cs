@@ -12,7 +12,13 @@ namespace TwoWayTapeAutomaton.Controller
 
         private Automata GetAutomaton(string state, List<Automata> automaLst, out DIR dir)
         {
-            Automata automaton = automaLst.Where(o => o.State == state).Distinct().FirstOrDefault();
+            Automata automaton = automaLst.Where(o => o.State == state.Trim()).Distinct().FirstOrDefault();
+            if (automaton == null)
+            {
+                dir = DIR.ERROR;
+                return null; 
+            }
+
             dir = automaton.Direction;
 
             if ((dir == DIR.HELL) || (dir == DIR.ACCEPT))

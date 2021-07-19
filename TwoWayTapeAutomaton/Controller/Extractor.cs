@@ -14,9 +14,8 @@ namespace TwoWayTapeAutomaton.Controller
         {
             var strLst = value.Split(new[] { delimeter },
                 StringSplitOptions.None);
-
             strLst = strLst.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToArray();
-
+            strLst = strLst.Select(s => s.Trim()).ToArray();
             return strLst;
         }
 
@@ -101,7 +100,7 @@ namespace TwoWayTapeAutomaton.Controller
             var symbols = automaLst.Where(w => w.Cmd != null)
                 .Select(a => a.Cmd.Select(c => c.Input).Distinct().ToList())
                 .SelectMany(x => x).Distinct().ToList();
-
+            symbols.Remove("#");
             string formalDef = "Q = { " + String.Join(", ", aState) + " }" + Environment.NewLine +
                 "S = { " + String.Join(", ", symbols) + " }" + Environment.NewLine +
                 "F = { " + String.Join(", ", fState) + " }" + Environment.NewLine +

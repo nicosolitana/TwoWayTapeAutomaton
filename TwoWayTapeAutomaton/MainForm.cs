@@ -49,8 +49,8 @@ namespace TwoWayTapeAutomaton
 
         private void Execute()
         {
-            //try
-            //{
+            try
+            {
                 string prog = txtProgram.Text;
                 string input = txtInputStr.Text;
                 if ((!string.IsNullOrEmpty(prog)) && (!string.IsNullOrEmpty(input))) {
@@ -61,19 +61,19 @@ namespace TwoWayTapeAutomaton
                     Execute exec = new Execute();
                     bool res = exec.Start(input, prog);
                     if (res == true) {
-                        MessageBox.Show("ACCEPT");
+                        MessageBox.Show("The input string is ACCEPTED.", "Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else {
-                        MessageBox.Show("REJECT");
+                        MessageBox.Show("The input string is REJECTED", "Result", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
+                } else {
+                    MessageBox.Show("Please input a value on input string or program.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                /*
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            */
         }
 
         private void GenerateTape(string input)
